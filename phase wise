@@ -1,0 +1,349 @@
+# MuseAIka - 3 Phase Development Plan 🎵
+
+## Phase 1: Core Emotion Detection & Music Recommendation (MVP)
+**Timeline: Weeks 1-3**
+
+### Features
+- ✅ User authentication (register/login)
+- ✅ Image upload for emotion detection
+- ✅ Text-based mood input
+- ✅ Manual mood selection
+- ✅ Basic music recommendations from Audius
+- ✅ Simple player interface
+- ✅ Mood history tracking
+
+### Tech Stack
+**Frontend:**
+- React 18 + Vite
+- React Router v6
+- Material-UI (MUI)
+- Axios
+- React Context for state
+
+**Backend:**
+- Flask + Flask-CORS
+- MongoDB (PyMongo)
+- JWT authentication
+- Hugging Face Transformers (emotion detection)
+- OpenCV (face detection)
+- Audius API client
+
+### File Structure Phase 1
+```
+phase1/
+├── backend/
+│   ├── src/
+│   │   ├── __init__.py
+│   │   ├── app.py                    # Main Flask app
+│   │   ├── config.py                 # Config class
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── user.py              # User model
+│   │   │   └── mood_entry.py        # MoodEntry model
+│   │   ├── routes/
+│   │   │   ├── __init__.py
+│   │   │   ├── auth.py              # Auth routes
+│   │   │   ├── emotion.py           # Emotion analysis routes
+│   │   │   └── music.py             # Music routes
+│   │   ├── services/
+│   │   │   ├── __init__.py
+│   │   │   ├── emotion_service.py   # ML emotion detection
+│   │   │   ├── audius_service.py    # Audius API client
+│   │   │   └── recommender.py       # Basic recommendation logic
+│   │   ├── middleware/
+│   │   │   ├── __init__.py
+│   │   │   └── auth_middleware.py   # JWT verification
+│   │   └── utils/
+│   │       ├── __init__.py
+│   │       ├── db.py                # MongoDB connection
+│   │       └── helpers.py           # Helper functions
+│   ├── requirements.txt
+│   ├── .env.example
+│   └── run.py
+│
+├── frontend/
+│   ├── src/
+│   │   ├── main.jsx
+│   │   ├── App.jsx
+│   │   ├── pages/
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   ├── MoodCheck.jsx
+│   │   │   ├── Recommendations.jsx
+│   │   │   └── History.jsx
+│   │   ├── components/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── MoodSelector.jsx
+│   │   │   ├── EmotionUploader.jsx
+│   │   │   ├── TextMoodAnalyzer.jsx
+│   │   │   ├── MusicPlayer.jsx
+│   │   │   ├── TrackCard.jsx
+│   │   │   └── ProtectedRoute.jsx
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   ├── utils/
+│   │   │   └── constants.js
+│   │   └── styles/
+│   │       └── theme.js
+│   ├── package.json
+│   ├── vite.config.js
+│   └── index.html
+│
+└── docker-compose.phase1.yml
+```
+
+---
+
+## Phase 2: Real-time Features & Advanced Recommendations
+**Timeline: Weeks 4-6**
+
+### New Features
+- ✅ Live webcam emotion tracking (WebSocket)
+- ✅ Real-time mood visualization
+- ✅ Hybrid recommender system (collaborative + content-based)
+- ✅ User feedback on recommendations
+- ✅ Last.fm metadata enrichment
+- ✅ Playlist creation and management
+- ✅ Redis caching layer
+
+### Additional Tech
+**Frontend:**
+- Socket.IO client
+- Chart.js for mood graphs
+- IndexedDB for offline support
+
+**Backend:**
+- Flask-SocketIO
+- Redis for caching
+- Last.fm API
+- Improved recommendation algorithm
+
+### New Files Phase 2
+```
+phase2/ (extends phase1)
+├── backend/
+│   ├── src/
+│   │   ├── sockets/
+│   │   │   ├── __init__.py
+│   │   │   └── mood_socket.py       # WebSocket handlers
+│   │   ├── services/
+│   │   │   ├── lastfm_service.py    # Last.fm API
+│   │   │   ├── cache_service.py     # Redis caching
+│   │   │   └── hybrid_recommender.py # Advanced recommendations
+│   │   └── models/
+│   │       └── playlist.py          # Playlist model
+│
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   │   ├── LiveMood.jsx         # Real-time tracking
+│   │   │   ├── Library.jsx          # User library
+│   │   │   └── PlaylistDetail.jsx
+│   │   ├── components/
+│   │   │   ├── WebcamMoodTracker.jsx
+│   │   │   ├── MoodChart.jsx
+│   │   │   └── PlaylistEditor.jsx
+│   │   └── hooks/
+│   │       ├── useSocket.js
+│   │       └── useWebcam.js
+│
+└── docker-compose.phase2.yml (adds Redis)
+```
+
+---
+
+## Phase 3: AI Music Generation & Collaboration
+**Timeline: Weeks 7-10**
+
+### New Features
+- ✅ AI music generation (Magenta/TensorFlow)
+- ✅ Collaborative playlists (multi-user editing)
+- ✅ Mistral AI chatbot for music discovery
+- ✅ Advanced mood analytics
+- ✅ Social sharing features
+- ✅ Export playlists
+- ✅ Celery for async tasks
+
+### Additional Tech
+**Backend:**
+- Celery + Redis (task queue)
+- TensorFlow/Magenta
+- Mistral AI API
+- AWS S3 for generated music storage
+
+**Frontend:**
+- WebRTC for collaboration
+- Advanced audio visualizations
+- PWA features
+
+### New Files Phase 3
+```
+phase3/ (extends phase2)
+├── backend/
+│   ├── src/
+│   │   ├── tasks/
+│   │   │   ├── __init__.py
+│   │   │   ├── celery_app.py        # Celery config
+│   │   │   └── generation_tasks.py  # Async generation
+│   │   ├── services/
+│   │   │   ├── music_generator.py   # Magenta wrapper
+│   │   │   ├── mistral_service.py   # AI chat
+│   │   │   └── storage_service.py   # S3 uploads
+│   │   ├── sockets/
+│   │   │   └── collab_socket.py     # Collaborative editing
+│   │   └── models/
+│   │       ├── generated_track.py
+│   │       └── conversation.py
+│
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   │   ├── Generator.jsx
+│   │   │   ├── CollabPlaylist.jsx
+│   │   │   └── Analytics.jsx
+│   │   ├── components/
+│   │   │   ├── MusicGeneratorForm.jsx
+│   │   │   ├── GenerationProgress.jsx
+│   │   │   ├── AIChatbot.jsx
+│   │   │   └── MoodAnalytics.jsx
+│   │   └── workers/
+│   │       └── audio.worker.js
+│
+└── docker-compose.phase3.yml (adds Celery worker)
+```
+
+---
+
+## Development Guidelines
+
+### To Prevent Import Issues:
+
+1. **Use Absolute Imports Everywhere**
+   ```python
+   # ✅ GOOD
+   from src.models.user import User
+   from src.services.emotion_service import EmotionService
+   
+   # ❌ BAD
+   from models.user import User
+   from ..services.emotion_service import EmotionService
+   ```
+
+2. **Always Include `__init__.py`**
+   - Every directory with Python files needs `__init__.py`
+   - Import key classes in `__init__.py` for easier access
+
+3. **Circular Import Prevention**
+   - Put shared types/interfaces in separate files
+   - Use lazy imports where necessary
+   - Keep models pure (no service imports)
+
+4. **Frontend Import Rules**
+   ```javascript
+   // ✅ GOOD - Absolute from src
+   import api from '@/services/api';
+   import { AuthContext } from '@/context/AuthContext';
+   
+   // Configure vite.config.js with alias
+   resolve: {
+     alias: { '@': '/src' }
+   }
+   ```
+
+5. **Database Connection Pattern**
+   ```python
+   # Single db.py file
+   from pymongo import MongoClient
+   
+   client = None
+   db = None
+   
+   def init_db(app):
+       global client, db
+       client = MongoClient(app.config['MONGODB_URI'])
+       db = client.get_database()
+       return db
+   
+   def get_db():
+       return db
+   ```
+
+6. **Service Layer Pattern**
+   - Services should be stateless classes or modules
+   - No circular dependencies between services
+   - Config passed at initialization
+
+---
+
+## Environment Setup Order
+
+### Phase 1:
+```bash
+# 1. Start MongoDB
+docker run -d -p 27017:27017 mongo:latest
+
+# 2. Backend setup
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python run.py
+
+# 3. Frontend setup
+cd frontend
+npm install
+npm run dev
+```
+
+### Phase 2 (adds Redis):
+```bash
+docker-compose -f docker-compose.phase2.yml up -d
+```
+
+### Phase 3 (adds Celery):
+```bash
+docker-compose -f docker-compose.phase3.yml up -d
+```
+
+---
+
+## Testing Strategy
+
+### Phase 1:
+- Manual testing of auth flow
+- Test emotion detection with sample images
+- Verify Audius API integration
+
+### Phase 2:
+- WebSocket connection testing
+- Load testing for real-time features
+- Cache hit rate monitoring
+
+### Phase 3:
+- Generation task success rate
+- Audio quality validation
+- Collaborative editing stress tests
+
+---
+
+## Deployment Strategy
+
+- **Phase 1**: Deploy to Heroku/Railway (simple)
+- **Phase 2**: Move to VPS with Docker Compose
+- **Phase 3**: Full Kubernetes deployment
+
+---
+
+## Next Steps
+
+I'll now provide complete, working code for **Phase 1** with:
+1. Full backend implementation
+2. Full frontend implementation
+3. Proper import structure
+4. Configuration files
+5. Setup instructions
+
+Ready to generate Phase 1 code?
