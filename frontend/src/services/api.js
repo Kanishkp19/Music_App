@@ -58,4 +58,12 @@ export const musicAPI = {
   getCustomRecommendations: (data) => api.post('/api/v1/music/recommend/custom', data),
 };
 
+// Generator API
+export const generatorAPI = {
+  startGeneration: (data) => api.post('/api/v1/generate', data),
+  getGenerationStatus: (jobId) => api.get(`/api/v1/generate/${jobId}`),
+  downloadGeneration: (jobId) => api.get(`/api/v1/generate/${jobId}/download`, { responseType: 'blob' }),
+  getGenerationHistory: (limit = 20) => api.get('/api/v1/generate/history', { params: { limit } }),
+};
+
 export default api;

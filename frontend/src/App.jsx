@@ -11,6 +11,7 @@ import { Home } from '@/pages/Home';
 import { MoodCheck } from '@/pages/MoodCheck';
 import { Recommendations } from '@/pages/Recommendations';
 import { History } from '@/pages/History';
+import { Generator } from '@/pages/Generator';
 
 function App() {
   return (
@@ -52,6 +53,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <History />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/generator"
+              element={
+                <ProtectedRoute>
+                  <Generator />
                 </ProtectedRoute>
               }
             />

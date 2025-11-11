@@ -18,6 +18,7 @@ export const Navbar = () => {
     { label: 'Home', path: '/' },
     { label: 'Mood Check', path: '/mood-check' },
     { label: 'Recommendations', path: '/recommendations' },
+    { label: 'Generator', path: '/generator' },
     { label: 'History', path: '/history' },
   ];
 

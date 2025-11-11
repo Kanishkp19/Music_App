@@ -1,17 +1,19 @@
 from flask import Blueprint, request, jsonify
 from src.services.audius_service import AudiusService
-from src.services.recommender import BasicRecommender
+from src.services.recommender import BasicRecommender, EnhancedRecommender
 from src.models.mood_entry import MoodEntry
 from src.utils.helpers import require_auth
 
 music_bp = Blueprint('music', __name__, url_prefix='/api/v1/music')
 audius_service = None
 recommender = None
+enhanced_recommender = None
 
-def init_music_services(audius: AudiusService, rec: BasicRecommender):
-    global audius_service, recommender
+def init_music_services(audius: AudiusService, rec: BasicRecommender, enhanced_rec: EnhancedRecommender):
+    global audius_service, recommender, enhanced_recommender
     audius_service = audius
     recommender = rec
+    enhanced_recommender = enhanced_rec
 
 @music_bp.route('/search', methods=['GET'])
 @require_auth
